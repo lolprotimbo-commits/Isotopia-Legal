@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Isotopia Utility — Legal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0c10;
+    --surface: #111318;
+    --surface2: #191c23;
+    --border: rgba(255,255,255,0.07);
+    --border-accent: rgba(88,166,255,0.3);
+    --text: #e6edf3;
+    --text-muted: #7d8590;
+    --text-faint: #484f58;
+    --accent: #58a6ff;
+    --accent-dim: rgba(88,166,255,0.12);
+    --accent-glow: rgba(88,166,255,0.06);
+    --green: #3fb950;
+    --green-dim: rgba(63,185,80,0.1);
+    --purple: #bc8cff;
+    --purple-dim: rgba(188,140,255,0.1);
+    --radius: 10px;
+    --radius-lg: 16px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* ── Grid background ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── Glow orb ── */
+  body::after {
+    content: '';
+    position: fixed;
+    top: -200px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 700px;
+    height: 500px;
+    background: radial-gradient(ellipse, rgba(88,166,255,0.07) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  main { position: relative; z-index: 1; }
+
+  /* ── Header ── */
+  header {
+    border-bottom: 1px solid var(--border);
+    background: rgba(10,12,16,0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .header-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    height: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+
+  .logo-icon {
+    width: 30px;
+    height: 30px;
+    background: var(--accent-dim);
+    border: 1px solid var(--border-accent);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .logo-icon svg { width: 16px; height: 16px; fill: var(--accent); }
+
+  .logo-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text);
+    letter-spacing: 0.01em;
+  }
+
+  .logo-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    background: var(--accent-dim);
+    color: var(--accent);
+    border: 1px solid var(--border-accent);
+    border-radius: 4px;
+    padding: 1px 6px;
+    letter-spacing: 0.05em;
+  }
+
+  nav { display: flex; gap: 4px; }
+
+  nav a {
+    text-decoration: none;
+    font-size: 13px;
+    color: var(--text-muted);
+    padding: 6px 12px;
+    border-radius: var(--radius);
+    transition: color 0.15s, background 0.15s;
+  }
+
+  nav a:hover { color: var(--text); background: var(--surface2); }
+  nav a.active { color: var(--accent); background: var(--accent-dim); }
+
+  /* ── Hero ── */
+  .hero {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 5rem 2rem 3rem;
+    text-align: center;
+  }
+
+  .hero-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 4px 12px;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.04em;
+  }
+
+  .hero-chip .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 8px var(--green);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .hero h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, #e6edf3 0%, #7d8590 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero p {
+    color: var(--text-muted);
+    font-size: 15px;
+    max-width: 460px;
+    margin: 0 auto;
+  }
+
+  /* ── Tab bar ── */
+  .tab-bar {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 2rem 2rem;
+    display: flex;
+    gap: 8px;
+  }
+
+  .tab-btn {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 7px 18px;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: all 0.15s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .tab-btn:hover { color: var(--text); border-color: rgba(255,255,255,0.15); background: var(--surface2); }
+
+  .tab-btn.active {
+    color: var(--accent);
+    border-color: var(--border-accent);
+    background: var(--accent-dim);
+  }
+
+  .tab-btn svg { width: 14px; height: 14px; }
+
+  /* ── Content layout ── */
+  .content-wrap {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 2rem 6rem;
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+
+  /* ── Sidebar TOC ── */
+  .sidebar {
+    position: sticky;
+    top: 78px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem;
+  }
+
+  .sidebar-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--text-faint);
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+
+  .sidebar-links { display: flex; flex-direction: column; gap: 2px; }
+
+  .sidebar-links a {
+    text-decoration: none;
+    font-size: 13px;
+    color: var(--text-muted);
+    padding: 5px 8px;
+    border-radius: 6px;
+    transition: all 0.12s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .sidebar-links a::before {
+    content: '';
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--text-faint);
+    flex-shrink: 0;
+  }
+
+  .sidebar-links a:hover { color: var(--text); background: var(--surface2); }
+  .sidebar-links a:hover::before { background: var(--accent); }
+
+  .sidebar-updated {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--text-faint);
+    letter-spacing: 0.04em;
+  }
+
+  /* ── Document ── */
+  .doc-page { display: none; }
+  .doc-page.active { display: block; }
+
+  .section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    margin-bottom: 10px;
+    overflow: hidden;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--text-faint);
+    width: 24px;
+    flex-shrink: 0;
+  }
+
+  .section-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text);
+    letter-spacing: -0.01em;
+  }
+
+  .section-body {
+    padding: 1.25rem;
+    color: var(--text-muted);
+    font-size: 14px;
+    line-height: 1.75;
+  }
+
+  .section-body ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 0.75rem;
+  }
+
+  .section-body ul li {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .section-body ul li::before {
+    content: '—';
+    color: var(--text-faint);
+    flex-shrink: 0;
+    margin-top: 1px;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+  }
+
+  .section-body strong {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  .section-body a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  .section-body a:hover { text-decoration: underline; }
+
+  .section-body .tag {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1px 6px;
+    color: var(--text-muted);
+  }
+
+  /* ── Highlight box ── */
+  .info-box {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    background: var(--accent-glow);
+    border: 1px solid var(--border-accent);
+    border-radius: var(--radius);
+    padding: 0.875rem 1rem;
+    margin-top: 0.75rem;
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  .info-box svg { width: 15px; height: 15px; fill: var(--accent); flex-shrink: 0; margin-top: 2px; }
+
+  .not-box {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    background: var(--green-dim);
+    border: 1px solid rgba(63,185,80,0.25);
+    border-radius: var(--radius);
+    padding: 0.875rem 1rem;
+    margin-top: 0.75rem;
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  .not-box svg { width: 15px; height: 15px; fill: var(--green); flex-shrink: 0; margin-top: 2px; }
+
+  /* ── Data table in privacy ── */
+  .data-grid {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0;
+    margin-top: 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    font-size: 13px;
+  }
+
+  .data-grid .dg-head {
+    padding: 6px 10px;
+    background: var(--surface2);
+    color: var(--text-faint);
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .data-grid .dg-cell {
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .data-grid .dg-cell:nth-child(4n+1),
+  .data-grid .dg-cell:nth-child(4n+2) { background: rgba(255,255,255,0.01); }
+
+  .data-grid .dg-cell:last-child,
+  .data-grid .dg-cell:nth-last-child(2) { border-bottom: none; }
+
+  .dot-type {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+
+  /* ── Footer ── */
+  footer {
+    border-top: 1px solid var(--border);
+    background: var(--surface);
+    position: relative;
+    z-index: 1;
+  }
+
+  .footer-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .footer-text {
+    font-size: 12px;
+    color: var(--text-faint);
+  }
+
+  .footer-discord {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--text-muted);
+    text-decoration: none;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    padding: 5px 12px;
+    border-radius: var(--radius);
+    transition: all 0.15s;
+  }
+
+  .footer-discord:hover {
+    color: var(--text);
+    border-color: rgba(255,255,255,0.15);
+  }
+
+  .footer-discord svg { width: 14px; height: 14px; fill: #5865F2; }
+
+  /* ── Responsive ── */
+  @media (max-width: 700px) {
+    .content-wrap { grid-template-columns: 1fr; }
+    .sidebar { position: static; }
+    .hero { padding: 3rem 1.5rem 2rem; }
+    .content-wrap { padding: 0 1.5rem 4rem; }
+    .tab-bar { padding: 0 1.5rem 1.5rem; }
+    .header-inner { padding: 0 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="#" class="logo">
+      <div class="logo-icon">
+        <svg viewBox="0 0 16 16"><path d="M8 1.5a1 1 0 0 1 .894.553l5 10A1 1 0 0 1 13 13.5H3a1 1 0 0 1-.894-1.447l5-10A1 1 0 0 1 8 1.5zm0 2.236L4.118 12.5h7.764L8 3.736z"/></svg>
+      </div>
+      <span class="logo-name">Isotopia Utility</span>
+      <span class="logo-badge">Discord Bot</span>
+    </a>
+    <nav>
+      <a href="#" class="active" onclick="showPage('tos', this); return false;">Terms</a>
+      <a href="#" onclick="showPage('privacy', this); return false;">Privacy</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="hero">
+    <div class="hero-chip">
+      <span class="dot"></span>
+      Last updated May 11, 2026
+    </div>
+    <h1 id="hero-title">Terms of Service</h1>
+    <p id="hero-desc">Rules and guidelines for using Isotopia Utility in your Discord server.</p>
+  </div>
+
+  <div class="tab-bar">
+    <button class="tab-btn active" id="tab-tos" onclick="showPage('tos')">
+      <svg viewBox="0 0 16 16" fill="currentColor"><path d="M3 2a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2zm2 1v10h6V3H5zm1 2h4v1H6V5zm0 2h4v1H6V7zm0 2h3v1H6V9z"/></svg>
+      Terms of Service
+    </button>
+    <button class="tab-btn" id="tab-privacy" onclick="showPage('privacy')">
+      <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 .5a.5.5 0 0 1 .35.146l6 5.75a.5.5 0 0 1 .15.354v6.75a2 2 0 0 1-2 2H3.5a2 2 0 0 1-2-2V6.75a.5.5 0 0 1 .15-.354l6-5.75A.5.5 0 0 1 8 .5zm0 1.04L2.5 7.01V13.5a1 1 0 0 0 1 1H5v-4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v4h1.5a1 1 0 0 0 1-1V7.01L8 1.54z"/></svg>
+      Privacy Policy
+    </button>
+  </div>
+
+  <div class="content-wrap">
+
+    <!-- ── Sidebar TOS ── -->
+    <aside class="sidebar" id="sidebar-tos">
+      <div class="sidebar-label">Contents</div>
+      <div class="sidebar-links">
+        <a href="#tos-1">1. Acceptance</a>
+        <a href="#tos-2">2. Eligibility</a>
+        <a href="#tos-3">3. Permitted Use</a>
+        <a href="#tos-4">4. Admin Responsibilities</a>
+        <a href="#tos-5">5. Termination</a>
+        <a href="#tos-6">6. Availability</a>
+        <a href="#tos-7">7. Changes</a>
+        <a href="#tos-8">8. Contact</a>
+      </div>
+      <div class="sidebar-updated">Updated 2026-05-11</div>
+    </aside>
+
+    <!-- ── Sidebar Privacy ── -->
+    <aside class="sidebar" id="sidebar-privacy" style="display:none">
+      <div class="sidebar-label">Contents</div>
+      <div class="sidebar-links">
+        <a href="#pp-1">1. Introduction</a>
+        <a href="#pp-2">2. Data Collected</a>
+        <a href="#pp-3">3. How We Use Data</a>
+        <a href="#pp-4">4. Data Retention</a>
+        <a href="#pp-5">5. Data Storage</a>
+        <a href="#pp-6">6. Deletion Requests</a>
+        <a href="#pp-7">7. Third Parties</a>
+        <a href="#pp-8">8. Security</a>
+        <a href="#pp-9">9. Changes</a>
+        <a href="#pp-10">10. Contact</a>
+      </div>
+      <div class="sidebar-updated">Updated 2026-05-11</div>
+    </aside>
+
+    <!-- ════════════════════ TOS ════════════════════ -->
+    <div class="doc-page active" id="page-tos">
+
+      <div class="section" id="tos-1">
+        <div class="section-header">
+          <span class="section-num">01</span>
+          <span class="section-title">Acceptance of Terms</span>
+        </div>
+        <div class="section-body">
+          By inviting or using this Discord bot ("the Bot"), you agree to be bound by these Terms of Service. If you do not agree, do not use the Bot.
+        </div>
+      </div>
+
+      <div class="section" id="tos-2">
+        <div class="section-header">
+          <span class="section-num">02</span>
+          <span class="section-title">Eligibility</span>
+        </div>
+        <div class="section-body">
+          You must be at least 13 years old to use the Bot, in accordance with Discord's Terms of Service. By using the Bot, you confirm that you meet this requirement.
+        </div>
+      </div>
+
+      <div class="section" id="tos-3">
+        <div class="section-header">
+          <span class="section-num">03</span>
+          <span class="section-title">Permitted Use</span>
+        </div>
+        <div class="section-body">
+          You may use the Bot for its intended purposes, including moderation, ticket management, and server administration. You agree <strong>not</strong> to:
+          <ul>
+            <li>Violate Discord's Terms of Service or Community Guidelines</li>
+            <li>Attempt to exploit, abuse, or manipulate the Bot's functionality</li>
+            <li>Use the Bot to harass, harm, or discriminate against other users</li>
+            <li>Attempt to gain unauthorized access to the Bot's systems or data</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="section" id="tos-4">
+        <div class="section-header">
+          <span class="section-num">04</span>
+          <span class="section-title">Server Administrator Responsibilities</span>
+        </div>
+        <div class="section-body">
+          Server administrators who invite the Bot are responsible for ensuring that their members are informed about these Terms of Service. Administrators are also responsible for configuring the Bot appropriately for their community.
+        </div>
+      </div>
+
+      <div class="section" id="tos-5">
+        <div class="section-header">
+          <span class="section-num">05</span>
+          <span class="section-title">Termination of Access</span>
+        </div>
+        <div class="section-body">
+          We reserve the right to restrict or terminate your access to the Bot at any time, without prior notice, if we believe you have violated these Terms of Service or are using the Bot in a harmful manner.
+        </div>
+      </div>
+
+      <div class="section" id="tos-6">
+        <div class="section-header">
+          <span class="section-num">06</span>
+          <span class="section-title">Availability</span>
+        </div>
+        <div class="section-body">
+          We do not guarantee that the Bot will be available at all times. The Bot may experience downtime due to maintenance, updates, or technical issues. We are not liable for any disruption of service.
+        </div>
+      </div>
+
+      <div class="section" id="tos-7">
+        <div class="section-header">
+          <span class="section-num">07</span>
+          <span class="section-title">Changes to Terms</span>
+        </div>
+        <div class="section-body">
+          We reserve the right to update these Terms of Service at any time. Continued use of the Bot after changes constitutes acceptance of the new terms.
+          <div class="info-box">
+            <svg viewBox="0 0 16 16"><path d="M8 .5a7.5 7.5 0 1 0 0 15A7.5 7.5 0 0 0 8 .5zM7.25 4.75a.75.75 0 1 1 1.5 0 .75.75 0 0 1-1.5 0zm.75 2a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0v-4a.5.5 0 0 1 .5-.5z"/></svg>
+            Significant changes will be announced in our official Discord support server.
+          </div>
+        </div>
+      </div>
+
+      <div class="section" id="tos-8">
+        <div class="section-header">
+          <span class="section-num">08</span>
+          <span class="section-title">Contact</span>
+        </div>
+        <div class="section-body">
+          If you have any questions about these Terms of Service, please reach out via our official Discord support server.
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ════════════════════ PRIVACY ════════════════════ -->
+    <div class="doc-page" id="page-privacy">
+
+      <div class="section" id="pp-1">
+        <div class="section-header">
+          <span class="section-num">01</span>
+          <span class="section-title">Introduction</span>
+        </div>
+        <div class="section-body">
+          This Privacy Policy explains what data the Bot collects, how it is used, and how it is stored. By using the Bot, you agree to the collection and use of your data as described in this policy.
+        </div>
+      </div>
+
+      <div class="section" id="pp-2">
+        <div class="section-header">
+          <span class="section-num">02</span>
+          <span class="section-title">Data We Collect</span>
+        </div>
+        <div class="section-body">
+          The Bot collects and stores only what is necessary to function:
+          <div class="data-grid">
+            <div class="dg-head">Data Type</div>
+            <div class="dg-head">Purpose</div>
+            <div class="dg-cell"><span class="dot-type"></span>User IDs</div>
+            <div class="dg-cell">Warnings, tickets, moderation actions</div>
+            <div class="dg-cell"><span class="dot-type"></span>Guild (Server) IDs</div>
+            <div class="dg-cell">Associate data with the correct server</div>
+            <div class="dg-cell"><span class="dot-type"></span>Channel IDs</div>
+            <div class="dg-cell">Track open support tickets</div>
+            <div class="dg-cell"><span class="dot-type"></span>Warning records</div>
+            <div class="dg-cell">Reason, moderator, timestamp</div>
+            <div class="dg-cell"><span class="dot-type"></span>Ticket records</div>
+            <div class="dg-cell">Creator, associated channel</div>
+            <div class="dg-cell"><span class="dot-type"></span>Moderator IDs</div>
+            <div class="dg-cell">Log who performed moderation actions</div>
+          </div>
+          <div class="not-box">
+            <svg viewBox="0 0 16 16"><path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/></svg>
+            We do <strong>not</strong> collect message content, passwords, email addresses, or any other personal information beyond what is listed above.
+          </div>
+        </div>
+      </div>
+
+      <div class="section" id="pp-3">
+        <div class="section-header">
+          <span class="section-num">03</span>
+          <span class="section-title">How We Use Your Data</span>
+        </div>
+        <div class="section-body">
+          The data we collect is used solely to provide the Bot's features:
+          <ul>
+            <li>Managing and tracking support tickets</li>
+            <li>Storing and displaying moderation warnings</li>
+            <li>Logging moderation actions to designated channels</li>
+          </ul>
+          <div class="not-box">
+            <svg viewBox="0 0 16 16"><path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/></svg>
+            We do not sell, share, or use your data for advertising or any commercial purpose.
+          </div>
+        </div>
+      </div>
+
+      <div class="section" id="pp-4">
+        <div class="section-header">
+          <span class="section-num">04</span>
+          <span class="section-title">Data Retention</span>
+        </div>
+        <div class="section-body">
+          <ul>
+            <li><strong>Warnings</strong> are automatically deleted after <span class="tag">30 days</span> via a database TTL (Time To Live) index.</li>
+            <li><strong>Ticket records</strong> are deleted when a ticket is closed.</li>
+            <li>Other data is retained as long as necessary to provide the Bot's functionality.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="section" id="pp-5">
+        <div class="section-header">
+          <span class="section-num">05</span>
+          <span class="section-title">Data Storage</span>
+        </div>
+        <div class="section-body">
+          All data is stored securely using <strong>MongoDB Atlas</strong>, a cloud database service. Data is stored on servers provided by MongoDB, Inc.
+          <div class="info-box">
+            <svg viewBox="0 0 16 16"><path d="M8 .5a7.5 7.5 0 1 0 0 15A7.5 7.5 0 0 0 8 .5zM7.25 4.75a.75.75 0 1 1 1.5 0 .75.75 0 0 1-1.5 0zm.75 2a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0v-4a.5.5 0 0 1 .5-.5z"/></svg>
+            Review MongoDB Atlas's privacy practices at <a href="https://www.mongodb.com/legal/privacy-policy" target="_blank">mongodb.com/legal/privacy-policy</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="section" id="pp-6">
+        <div class="section-header">
+          <span class="section-num">06</span>
+          <span class="section-title">Data Deletion Requests</span>
+        </div>
+        <div class="section-body">
+          If you would like your data to be deleted, please contact us via our official Discord support server. We will process your request within a reasonable timeframe.
+        </div>
+      </div>
+
+      <div class="section" id="pp-7">
+        <div class="section-header">
+          <span class="section-num">07</span>
+          <span class="section-title">Third-Party Services</span>
+        </div>
+        <div class="section-body">
+          The Bot interacts with the following third-party services:
+          <ul>
+            <li><strong>Discord</strong> — the platform the Bot operates on. <a href="https://discord.com/privacy" target="_blank">Discord's privacy policy</a> applies to all platform interactions.</li>
+            <li><strong>MongoDB Atlas</strong> — used for data storage as described above.</li>
+            <li><strong>KataBump</strong> — used to host the Bot. KataBump's privacy policy applies to the hosting infrastructure.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="section" id="pp-8">
+        <div class="section-header">
+          <span class="section-num">08</span>
+          <span class="section-title">Security</span>
+        </div>
+        <div class="section-body">
+          We take reasonable measures to protect the data we store. However, no system is completely secure, and we cannot guarantee absolute security of your data.
+        </div>
+      </div>
+
+      <div class="section" id="pp-9">
+        <div class="section-header">
+          <span class="section-num">09</span>
+          <span class="section-title">Changes to This Policy</span>
+        </div>
+        <div class="section-body">
+          We reserve the right to update this Privacy Policy at any time. Continued use of the Bot after changes constitutes acceptance of the updated policy.
+          <div class="info-box">
+            <svg viewBox="0 0 16 16"><path d="M8 .5a7.5 7.5 0 1 0 0 15A7.5 7.5 0 0 0 8 .5zM7.25 4.75a.75.75 0 1 1 1.5 0 .75.75 0 0 1-1.5 0zm.75 2a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0v-4a.5.5 0 0 1 .5-.5z"/></svg>
+            Significant changes will be announced in our official Discord support server.
+          </div>
+        </div>
+      </div>
+
+      <div class="section" id="pp-10">
+        <div class="section-header">
+          <span class="section-num">10</span>
+          <span class="section-title">Contact</span>
+        </div>
+        <div class="section-body">
+          If you have any questions or concerns about this Privacy Policy, please contact us via our official Discord support server.
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <span class="footer-text">© 2026 Isotopia Utility. All rights reserved.</span>
+    <a href="#" class="footer-discord">
+      <svg viewBox="0 0 16 16"><path d="M13.545 2.907a13.227 13.227 0 0 0-3.257-1.011.05.05 0 0 0-.052.025c-.141.25-.297.577-.406.833a12.19 12.19 0 0 0-3.658 0 8.258 8.258 0 0 0-.412-.833.051.051 0 0 0-.052-.025c-1.125.194-2.22.534-3.257 1.011a.041.041 0 0 0-.021.018C.356 6.024-.213 9.047.066 12.032c.001.014.01.028.021.037a13.276 13.276 0 0 0 3.995 2.02.05.05 0 0 0 .056-.019c.308-.42.582-.863.818-1.329a.05.05 0 0 0-.01-.059.051.051 0 0 0-.018-.011 8.875 8.875 0 0 1-1.248-.595.05.05 0 0 1-.02-.066.051.051 0 0 1 .015-.019c.084-.063.168-.129.248-.195a.05.05 0 0 1 .051-.007c2.619 1.196 5.454 1.196 8.041 0a.052.052 0 0 1 .053.007c.08.066.164.132.248.195a.051.051 0 0 1-.004.085 8.254 8.254 0 0 1-1.249.594.05.05 0 0 0-.03.03.052.052 0 0 0 .003.041c.24.465.515.909.817 1.329a.05.05 0 0 0 .056.019 13.235 13.235 0 0 0 4.001-2.02.049.049 0 0 0 .021-.037c.334-3.451-.559-6.449-2.366-9.106a.034.034 0 0 0-.02-.019zm-8.198 7.307c-.789 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.45.73 1.438 1.613 0 .888-.637 1.612-1.438 1.612zm5.316 0c-.788 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.451.73 1.438 1.613 0 .888-.631 1.612-1.438 1.612z"/></svg>
+      Support Server
+    </a>
+  </div>
+</footer>
+
+<script>
+const pages = {
+  tos: {
+    title: 'Terms of Service',
+    desc: 'Rules and guidelines for using Isotopia Utility in your Discord server.'
+  },
+  privacy: {
+    title: 'Privacy Policy',
+    desc: 'What data the Bot collects, how it is used, and how it is stored.'
+  }
+};
+
+function showPage(name, navEl) {
+  document.querySelectorAll('.doc-page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.sidebar').forEach(s => s.style.display = 'none');
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+
+  document.getElementById('page-' + name).classList.add('active');
+  document.getElementById('sidebar-' + name).style.display = '';
+  document.getElementById('tab-' + name).classList.add('active');
+
+  document.getElementById('hero-title').textContent = pages[name].title;
+  document.getElementById('hero-desc').textContent = pages[name].desc;
+
+  if (navEl) navEl.classList.add('active');
+  else {
+    document.querySelectorAll('nav a').forEach((a, i) => {
+      if ((name === 'tos' && i === 0) || (name === 'privacy' && i === 1)) a.classList.add('active');
+    });
+  }
+}
+</script>
+</body>
+</html>
